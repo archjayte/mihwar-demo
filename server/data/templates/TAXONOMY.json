@@ -1,0 +1,1382 @@
+{
+  "count": 20,
+  "categories": [
+    {
+      "id": "procurement",
+      "name_ar": "التوريد والمشتريات",
+      "template_count": 10,
+      "specialties": [
+        "أثاث",
+        "تقني",
+        "صحي",
+        "صيانة",
+        "طاقة",
+        "مركبات",
+        "مستلزمات"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-001",
+          "specialty": "تقني",
+          "name": "توريد أجهزة حاسب حكومية"
+        },
+        {
+          "template_id": "TPL-002",
+          "specialty": "تقني",
+          "name": "توريد أجهزة اتصال لاسلكي"
+        },
+        {
+          "template_id": "TPL-003",
+          "specialty": "تقني",
+          "name": "توريد كاميرات مراقبة"
+        },
+        {
+          "template_id": "TPL-004",
+          "specialty": "أثاث",
+          "name": "توريد أثاث مكتبي"
+        },
+        {
+          "template_id": "TPL-005",
+          "specialty": "أثاث",
+          "name": "توريد أثاث مراكز الخدمة"
+        },
+        {
+          "template_id": "TPL-006",
+          "specialty": "صحي",
+          "name": "توريد معدات إسعاف أولي"
+        },
+        {
+          "template_id": "TPL-007",
+          "specialty": "مركبات",
+          "name": "توريد مركبات خدمة ميدانية"
+        },
+        {
+          "template_id": "TPL-008",
+          "specialty": "صيانة",
+          "name": "توريد معدات صيانة المباني"
+        },
+        {
+          "template_id": "TPL-009",
+          "specialty": "مستلزمات",
+          "name": "توريد لوحات إرشادية"
+        },
+        {
+          "template_id": "TPL-010",
+          "specialty": "طاقة",
+          "name": "توريد محطات شحن مركبات"
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "name_ar": "التحول الرقمي والأنظمة",
+      "template_count": 10,
+      "specialties": [
+        "أرشفة",
+        "أصول",
+        "بنية تقنية",
+        "تكامل",
+        "خدمات",
+        "ذكاء اصطناعي",
+        "شبكات",
+        "مدفوعات",
+        "موارد بشرية",
+        "هوية"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-011",
+          "specialty": "موارد بشرية",
+          "name": "تطوير نظام إدارة الموارد البشرية"
+        },
+        {
+          "template_id": "TPL-012",
+          "specialty": "أصول",
+          "name": "تطوير منصة إدارة الأصول"
+        },
+        {
+          "template_id": "TPL-013",
+          "specialty": "خدمات",
+          "name": "إنشاء تطبيق للخدمات الحكومية"
+        },
+        {
+          "template_id": "TPL-014",
+          "specialty": "مدفوعات",
+          "name": "إنشاء بوابة دفع إلكتروني"
+        },
+        {
+          "template_id": "TPL-015",
+          "specialty": "تكامل",
+          "name": "ربط الأنظمة بين الجهات"
+        },
+        {
+          "template_id": "TPL-016",
+          "specialty": "بنية تقنية",
+          "name": "تحديث مركز بيانات حكومي"
+        },
+        {
+          "template_id": "TPL-017",
+          "specialty": "شبكات",
+          "name": "توسعة شبكة الواي فاي الحكومية"
+        },
+        {
+          "template_id": "TPL-018",
+          "specialty": "هوية",
+          "name": "تفعيل الهوية الرقمية في الخدمات"
+        },
+        {
+          "template_id": "TPL-019",
+          "specialty": "ذكاء اصطناعي",
+          "name": "إنشاء مساعد ذكاء اصطناعي محلي"
+        },
+        {
+          "template_id": "TPL-020",
+          "specialty": "أرشفة",
+          "name": "إنشاء نظام أرشفة إلكترونية"
+        }
+      ]
+    },
+    {
+      "id": "construction",
+      "name_ar": "الإنشاءات والمباني",
+      "template_count": 10,
+      "specialties": [
+        "تدريب",
+        "خدمات مساندة",
+        "رياضة",
+        "طوارئ",
+        "مباني خدمية",
+        "مختبرات",
+        "مرافق أمنية",
+        "مستودعات",
+        "مقار",
+        "مواقف"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-021",
+          "specialty": "مباني خدمية",
+          "name": "إنشاء مركز خدمات حكومي"
+        },
+        {
+          "template_id": "TPL-022",
+          "specialty": "مرافق أمنية",
+          "name": "إنشاء مركز شرطة"
+        },
+        {
+          "template_id": "TPL-023",
+          "specialty": "مستودعات",
+          "name": "إنشاء مستودع مركزي"
+        },
+        {
+          "template_id": "TPL-024",
+          "specialty": "مقار",
+          "name": "إنشاء مقر إداري"
+        },
+        {
+          "template_id": "TPL-025",
+          "specialty": "مواقف",
+          "name": "إنشاء ساحة مواقف حكومية"
+        },
+        {
+          "template_id": "TPL-026",
+          "specialty": "تدريب",
+          "name": "إنشاء مبنى تدريب"
+        },
+        {
+          "template_id": "TPL-027",
+          "specialty": "رياضة",
+          "name": "إنشاء مركز رياضي مجتمعي"
+        },
+        {
+          "template_id": "TPL-028",
+          "specialty": "مختبرات",
+          "name": "إنشاء مختبر فني"
+        },
+        {
+          "template_id": "TPL-029",
+          "specialty": "طوارئ",
+          "name": "إنشاء مركز استجابة للطوارئ"
+        },
+        {
+          "template_id": "TPL-030",
+          "specialty": "خدمات مساندة",
+          "name": "إنشاء ورشة صيانة"
+        }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "name_ar": "الصيانة وإدارة المرافق",
+      "template_count": 10,
+      "specialties": [
+        "أسطح",
+        "تشطيبات",
+        "تكييف",
+        "خوادم",
+        "سباكة",
+        "طاقة احتياطية",
+        "كهرباء",
+        "مباني",
+        "مركبات",
+        "مصاعد"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-031",
+          "specialty": "مباني",
+          "name": "الصيانة الدورية للمباني الحكومية"
+        },
+        {
+          "template_id": "TPL-032",
+          "specialty": "تكييف",
+          "name": "تجديد نظام التكييف المركزي"
+        },
+        {
+          "template_id": "TPL-033",
+          "specialty": "مصاعد",
+          "name": "تحديث مصاعد المبنى"
+        },
+        {
+          "template_id": "TPL-034",
+          "specialty": "كهرباء",
+          "name": "تأهيل لوحات التوزيع الكهربائية"
+        },
+        {
+          "template_id": "TPL-035",
+          "specialty": "سباكة",
+          "name": "تأهيل شبكات المياه الداخلية"
+        },
+        {
+          "template_id": "TPL-036",
+          "specialty": "طاقة احتياطية",
+          "name": "الصيانة الوقائية للمولدات"
+        },
+        {
+          "template_id": "TPL-037",
+          "specialty": "أسطح",
+          "name": "معالجة تسربات أسطح المباني"
+        },
+        {
+          "template_id": "TPL-038",
+          "specialty": "خوادم",
+          "name": "إعادة تأهيل غرفة الخوادم"
+        },
+        {
+          "template_id": "TPL-039",
+          "specialty": "تشطيبات",
+          "name": "استبدال الأرضيات المتضررة"
+        },
+        {
+          "template_id": "TPL-040",
+          "specialty": "مركبات",
+          "name": "برنامج صيانة الأسطول الحكومي"
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "name_ar": "الأمن والسلامة",
+      "template_count": 10,
+      "specialties": [
+        "إخلاء",
+        "إنارة",
+        "بلاغات",
+        "حريق",
+        "حماية",
+        "قيادة",
+        "كشف",
+        "مداخل",
+        "مراقبة",
+        "مراقبة دخول"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-041",
+          "specialty": "مراقبة",
+          "name": "تركيب كاميرات مراقبة للمباني"
+        },
+        {
+          "template_id": "TPL-042",
+          "specialty": "مداخل",
+          "name": "تركيب بوابات دخول إلكترونية"
+        },
+        {
+          "template_id": "TPL-043",
+          "specialty": "حريق",
+          "name": "تحديث نظام إنذار الحريق"
+        },
+        {
+          "template_id": "TPL-044",
+          "specialty": "إنارة",
+          "name": "تطوير الإنارة الأمنية للمحيط"
+        },
+        {
+          "template_id": "TPL-045",
+          "specialty": "قيادة",
+          "name": "تجهيز غرفة قيادة وتحكم"
+        },
+        {
+          "template_id": "TPL-046",
+          "specialty": "حماية",
+          "name": "تأمين محيط منشأة حكومية"
+        },
+        {
+          "template_id": "TPL-047",
+          "specialty": "بلاغات",
+          "name": "ربط البلاغات بمنظومة الاستجابة"
+        },
+        {
+          "template_id": "TPL-048",
+          "specialty": "كشف",
+          "name": "توفير أجهزة كشف أمنية"
+        },
+        {
+          "template_id": "TPL-049",
+          "specialty": "إخلاء",
+          "name": "تحديث خطة الإخلاء والسلامة"
+        },
+        {
+          "template_id": "TPL-050",
+          "specialty": "مراقبة دخول",
+          "name": "نظام مراقبة مداخل المركبات"
+        }
+      ]
+    },
+    {
+      "id": "legislation",
+      "name_ar": "التشريعات والسياسات",
+      "template_count": 10,
+      "specialties": [
+        "بيانات",
+        "بيانات مشتركة",
+        "تطوع",
+        "حوكمة",
+        "خدمات",
+        "رسوم",
+        "سلامة",
+        "عقود",
+        "قوانين",
+        "لوائح"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-051",
+          "specialty": "قوانين",
+          "name": "إعداد مشروع تشريع قانون"
+        },
+        {
+          "template_id": "TPL-052",
+          "specialty": "لوائح",
+          "name": "تعديل لائحة تنظيمية"
+        },
+        {
+          "template_id": "TPL-053",
+          "specialty": "بيانات",
+          "name": "إعداد سياسة حماية البيانات"
+        },
+        {
+          "template_id": "TPL-054",
+          "specialty": "سلامة",
+          "name": "وضع ضوابط سلامة المنشآت"
+        },
+        {
+          "template_id": "TPL-055",
+          "specialty": "خدمات",
+          "name": "تطوير تنظيم تقديم الخدمات"
+        },
+        {
+          "template_id": "TPL-056",
+          "specialty": "حوكمة",
+          "name": "إعداد دليل حوكمة المشاريع"
+        },
+        {
+          "template_id": "TPL-057",
+          "specialty": "عقود",
+          "name": "تنظيم إجراءات التعاقد"
+        },
+        {
+          "template_id": "TPL-058",
+          "specialty": "رسوم",
+          "name": "مراجعة لائحة الرسوم الحكومية"
+        },
+        {
+          "template_id": "TPL-059",
+          "specialty": "بيانات مشتركة",
+          "name": "إعداد ميثاق تبادل البيانات"
+        },
+        {
+          "template_id": "TPL-060",
+          "specialty": "تطوع",
+          "name": "تنظيم برامج التطوع"
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "name_ar": "الخدمات وتجربة المتعامل",
+      "template_count": 10,
+      "specialties": [
+        "اتصال",
+        "تراخيص",
+        "تصاريح",
+        "خدمة متنقلة",
+        "دفع موحد",
+        "رقمنة",
+        "شكاوى",
+        "مواعيد",
+        "نافذة موحدة",
+        "وصول شامل"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-061",
+          "specialty": "رقمنة",
+          "name": "رقمنة رحلة إصدار شهادة"
+        },
+        {
+          "template_id": "TPL-062",
+          "specialty": "نافذة موحدة",
+          "name": "إنشاء نافذة خدمات موحدة"
+        },
+        {
+          "template_id": "TPL-063",
+          "specialty": "مواعيد",
+          "name": "إنشاء منصة مواعيد"
+        },
+        {
+          "template_id": "TPL-064",
+          "specialty": "تراخيص",
+          "name": "تبسيط خدمة إصدار رخصة"
+        },
+        {
+          "template_id": "TPL-065",
+          "specialty": "تصاريح",
+          "name": "إعادة هندسة إجراءات التصاريح"
+        },
+        {
+          "template_id": "TPL-066",
+          "specialty": "وصول شامل",
+          "name": "تحسين الخدمات لكبار السن"
+        },
+        {
+          "template_id": "TPL-067",
+          "specialty": "اتصال",
+          "name": "تطوير مركز الاتصال الحكومي"
+        },
+        {
+          "template_id": "TPL-068",
+          "specialty": "دفع موحد",
+          "name": "توحيد نقطة دفع الرسوم"
+        },
+        {
+          "template_id": "TPL-069",
+          "specialty": "خدمة متنقلة",
+          "name": "إطلاق وحدة خدمة متنقلة"
+        },
+        {
+          "template_id": "TPL-070",
+          "specialty": "شكاوى",
+          "name": "إنشاء نظام متابعة الشكاوى"
+        }
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "name_ar": "البنية التحتية والمرافق العامة",
+      "template_count": 10,
+      "specialties": [
+        "أرصفة",
+        "أمطار",
+        "إشارات",
+        "إنارة",
+        "اتصالات",
+        "تقاطعات",
+        "صرف",
+        "طرق",
+        "مشاة",
+        "مياه"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-071",
+          "specialty": "طرق",
+          "name": "تحسين طريق رئيسي"
+        },
+        {
+          "template_id": "TPL-072",
+          "specialty": "تقاطعات",
+          "name": "تطوير دوار مروري"
+        },
+        {
+          "template_id": "TPL-073",
+          "specialty": "مياه",
+          "name": "توسعة شبكة مياه"
+        },
+        {
+          "template_id": "TPL-074",
+          "specialty": "صرف",
+          "name": "توسعة شبكة صرف صحي"
+        },
+        {
+          "template_id": "TPL-075",
+          "specialty": "أمطار",
+          "name": "إنشاء نظام تصريف مياه أمطار"
+        },
+        {
+          "template_id": "TPL-076",
+          "specialty": "مشاة",
+          "name": "إنشاء جسر مشاة"
+        },
+        {
+          "template_id": "TPL-077",
+          "specialty": "أرصفة",
+          "name": "تطوير الأرصفة ومسارات المشاة"
+        },
+        {
+          "template_id": "TPL-078",
+          "specialty": "إشارات",
+          "name": "تحديث الإشارات الضوئية"
+        },
+        {
+          "template_id": "TPL-079",
+          "specialty": "إنارة",
+          "name": "توسعة إنارة الطرق"
+        },
+        {
+          "template_id": "TPL-080",
+          "specialty": "اتصالات",
+          "name": "تمديد شبكة ألياف حكومية"
+        }
+      ]
+    },
+    {
+      "id": "urban",
+      "name_ar": "التخطيط الحضري والأراضي",
+      "template_count": 10,
+      "specialties": [
+        "أراضي",
+        "أسواق",
+        "استثمار",
+        "تخطيط",
+        "تقسيم",
+        "ساحات",
+        "عناوين",
+        "مساحة",
+        "مواقف",
+        "ميادين"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-081",
+          "specialty": "تخطيط",
+          "name": "إعداد مخطط استعمالات الأراضي"
+        },
+        {
+          "template_id": "TPL-082",
+          "specialty": "أراضي",
+          "name": "حصر الأراضي الحكومية"
+        },
+        {
+          "template_id": "TPL-083",
+          "specialty": "تقسيم",
+          "name": "تعديل مخطط تقسيم"
+        },
+        {
+          "template_id": "TPL-084",
+          "specialty": "مساحة",
+          "name": "تنفيذ مسح جغرافي GIS"
+        },
+        {
+          "template_id": "TPL-085",
+          "specialty": "عناوين",
+          "name": "ترقيم المباني والعناوين"
+        },
+        {
+          "template_id": "TPL-086",
+          "specialty": "مواقف",
+          "name": "إعداد مخطط المواقف العامة"
+        },
+        {
+          "template_id": "TPL-087",
+          "specialty": "ميادين",
+          "name": "تطوير ميدان عام"
+        },
+        {
+          "template_id": "TPL-088",
+          "specialty": "أسواق",
+          "name": "إعادة تأهيل سوق شعبي"
+        },
+        {
+          "template_id": "TPL-089",
+          "specialty": "ساحات",
+          "name": "تجهيز ساحة عامة"
+        },
+        {
+          "template_id": "TPL-090",
+          "specialty": "استثمار",
+          "name": "تخطيط منطقة استثمارية"
+        }
+      ]
+    },
+    {
+      "id": "environment",
+      "name_ar": "البيئة والاستدامة",
+      "template_count": 10,
+      "specialties": [
+        "تدوير",
+        "تشجير",
+        "شحن",
+        "ضوضاء",
+        "طاقة",
+        "فرز",
+        "كربون",
+        "مياه",
+        "نفايات",
+        "هواء"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-091",
+          "specialty": "مياه",
+          "name": "برنامج ترشيد المياه بالمباني"
+        },
+        {
+          "template_id": "TPL-092",
+          "specialty": "طاقة",
+          "name": "تركيب ألواح طاقة شمسية"
+        },
+        {
+          "template_id": "TPL-093",
+          "specialty": "نفايات",
+          "name": "خفض النفايات التشغيلية"
+        },
+        {
+          "template_id": "TPL-094",
+          "specialty": "تشجير",
+          "name": "تشجير المرافق العامة"
+        },
+        {
+          "template_id": "TPL-095",
+          "specialty": "هواء",
+          "name": "برنامج مراقبة جودة الهواء"
+        },
+        {
+          "template_id": "TPL-096",
+          "specialty": "ضوضاء",
+          "name": "تركيب محطات قياس الضوضاء"
+        },
+        {
+          "template_id": "TPL-097",
+          "specialty": "فرز",
+          "name": "تنفيذ برنامج فرز النفايات"
+        },
+        {
+          "template_id": "TPL-098",
+          "specialty": "تدوير",
+          "name": "إنشاء منظومة إعادة تدوير"
+        },
+        {
+          "template_id": "TPL-099",
+          "specialty": "شحن",
+          "name": "تطوير محطات شحن عامة"
+        },
+        {
+          "template_id": "TPL-100",
+          "specialty": "كربون",
+          "name": "إعداد خط أساس الانبعاثات"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "name_ar": "الصحة والوقاية المجتمعية",
+      "template_count": 10,
+      "specialties": [
+        "تطعيم",
+        "توعية",
+        "رحلة مريض",
+        "صيدلة",
+        "عن بعد",
+        "عيادات",
+        "فحوص",
+        "مختبرات",
+        "مدارس",
+        "ملفات طبية"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-101",
+          "specialty": "عيادات",
+          "name": "إنشاء عيادة مجتمعية"
+        },
+        {
+          "template_id": "TPL-102",
+          "specialty": "تطعيم",
+          "name": "تنظيم حملة تطعيم متنقلة"
+        },
+        {
+          "template_id": "TPL-103",
+          "specialty": "مدارس",
+          "name": "إطلاق برنامج صحة مدرسية"
+        },
+        {
+          "template_id": "TPL-104",
+          "specialty": "ملفات طبية",
+          "name": "رقمنة ملفات المرضى"
+        },
+        {
+          "template_id": "TPL-105",
+          "specialty": "عن بعد",
+          "name": "إنشاء خدمة استشارة طبية عن بعد"
+        },
+        {
+          "template_id": "TPL-106",
+          "specialty": "مختبرات",
+          "name": "تحديث أجهزة مختبر صحي"
+        },
+        {
+          "template_id": "TPL-107",
+          "specialty": "رحلة مريض",
+          "name": "تحسين إجراءات رحلة المريض"
+        },
+        {
+          "template_id": "TPL-108",
+          "specialty": "صيدلة",
+          "name": "رقمنة إدارة مخزون دوائي"
+        },
+        {
+          "template_id": "TPL-109",
+          "specialty": "توعية",
+          "name": "تنفيذ حملة صحة وقائية"
+        },
+        {
+          "template_id": "TPL-110",
+          "specialty": "فحوص",
+          "name": "إطلاق مركز فحوصات دورية"
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "name_ar": "التعليم والتدريب",
+      "template_count": 10,
+      "specialties": [
+        "أكاديميات",
+        "ابتعاث",
+        "احتياجات",
+        "تعلم إلكتروني",
+        "قيادات",
+        "محاكاة",
+        "مدربون",
+        "معسكرات",
+        "مناهج",
+        "مهارات"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-111",
+          "specialty": "مناهج",
+          "name": "تطوير منهج تدريبي مؤسسي"
+        },
+        {
+          "template_id": "TPL-112",
+          "specialty": "تعلم إلكتروني",
+          "name": "إنشاء منصة تدريب إلكتروني"
+        },
+        {
+          "template_id": "TPL-113",
+          "specialty": "أكاديميات",
+          "name": "إنشاء أكاديمية تدريب وظيفي"
+        },
+        {
+          "template_id": "TPL-114",
+          "specialty": "محاكاة",
+          "name": "تجهيز معمل محاكاة"
+        },
+        {
+          "template_id": "TPL-115",
+          "specialty": "مدربون",
+          "name": "تطوير برنامج تدريب المدربين"
+        },
+        {
+          "template_id": "TPL-116",
+          "specialty": "مهارات",
+          "name": "إطلاق برنامج المهارات الرقمية"
+        },
+        {
+          "template_id": "TPL-117",
+          "specialty": "قيادات",
+          "name": "تأهيل القيادات الحكومية"
+        },
+        {
+          "template_id": "TPL-118",
+          "specialty": "احتياجات",
+          "name": "إجراء تحليل الاحتياجات التدريبية"
+        },
+        {
+          "template_id": "TPL-119",
+          "specialty": "ابتعاث",
+          "name": "تطوير برنامج ابتعاث تخصصي"
+        },
+        {
+          "template_id": "TPL-120",
+          "specialty": "معسكرات",
+          "name": "تنظيم معسكر مهارات شبابية"
+        }
+      ]
+    },
+    {
+      "id": "hr",
+      "name_ar": "الموارد البشرية والإنتاجية",
+      "template_count": 10,
+      "specialties": [
+        "أداء",
+        "إنتاجية",
+        "تأهيل",
+        "تخطيط",
+        "حوافز",
+        "دوام",
+        "سعادة",
+        "مستقبل",
+        "مواهب",
+        "وظائف"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-121",
+          "specialty": "إنتاجية",
+          "name": "تطوير نظام قياس إنتاجية الموظفين"
+        },
+        {
+          "template_id": "TPL-122",
+          "specialty": "أداء",
+          "name": "إعادة هندسة تقييم الأداء"
+        },
+        {
+          "template_id": "TPL-123",
+          "specialty": "تخطيط",
+          "name": "إعداد خطة القوى العاملة"
+        },
+        {
+          "template_id": "TPL-124",
+          "specialty": "دوام",
+          "name": "توحيد سياسة دوام المناوبات"
+        },
+        {
+          "template_id": "TPL-125",
+          "specialty": "مستقبل",
+          "name": "برنامج وظائف المستقبل"
+        },
+        {
+          "template_id": "TPL-126",
+          "specialty": "حوافز",
+          "name": "تطوير سياسة المكافآت"
+        },
+        {
+          "template_id": "TPL-127",
+          "specialty": "مواهب",
+          "name": "بناء برنامج اكتشاف المواهب"
+        },
+        {
+          "template_id": "TPL-128",
+          "specialty": "وظائف",
+          "name": "تحديث بطاقات الوصف الوظيفي"
+        },
+        {
+          "template_id": "TPL-129",
+          "specialty": "تأهيل",
+          "name": "تنفيذ برنامج تأهيل الموظفين الجدد"
+        },
+        {
+          "template_id": "TPL-130",
+          "specialty": "سعادة",
+          "name": "مشروع تحسين سعادة الموظفين"
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "name_ar": "المالية والرقابة",
+      "template_count": 10,
+      "specialties": [
+        "أصول",
+        "إيرادات",
+        "تدقيق",
+        "تكاليف",
+        "صرف",
+        "عقود",
+        "عهد",
+        "فواتير",
+        "مشتريات",
+        "ميزانية"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-131",
+          "specialty": "ميزانية",
+          "name": "إعداد مشروع ميزانية سنوية"
+        },
+        {
+          "template_id": "TPL-132",
+          "specialty": "تكاليف",
+          "name": "برنامج ترشيد المصروفات"
+        },
+        {
+          "template_id": "TPL-133",
+          "specialty": "مشتريات",
+          "name": "أتمتة دورة المشتريات"
+        },
+        {
+          "template_id": "TPL-134",
+          "specialty": "فواتير",
+          "name": "أتمتة اعتماد الفواتير"
+        },
+        {
+          "template_id": "TPL-135",
+          "specialty": "إيرادات",
+          "name": "تحسين تحصيل الرسوم"
+        },
+        {
+          "template_id": "TPL-136",
+          "specialty": "تدقيق",
+          "name": "إعداد خطة تدقيق مالي"
+        },
+        {
+          "template_id": "TPL-137",
+          "specialty": "صرف",
+          "name": "تحديث سياسة صلاحيات الصرف"
+        },
+        {
+          "template_id": "TPL-138",
+          "specialty": "عهد",
+          "name": "تنفيذ مشروع جرد العهد"
+        },
+        {
+          "template_id": "TPL-139",
+          "specialty": "عقود",
+          "name": "إنشاء سجل مالي للعقود"
+        },
+        {
+          "template_id": "TPL-140",
+          "specialty": "أصول",
+          "name": "تحديث سياسة الإهلاك والأصول"
+        }
+      ]
+    },
+    {
+      "id": "tourism",
+      "name_ar": "السياحة والثقافة والتراث",
+      "template_count": 10,
+      "specialties": [
+        "إرشاد",
+        "تراث",
+        "ثقافة",
+        "حجوزات",
+        "زوار",
+        "متاحف",
+        "مسارات",
+        "مهرجانات",
+        "موسمية",
+        "هوية"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-141",
+          "specialty": "مهرجانات",
+          "name": "تنظيم مهرجان سياحي"
+        },
+        {
+          "template_id": "TPL-142",
+          "specialty": "مسارات",
+          "name": "تطوير مسار سياحي"
+        },
+        {
+          "template_id": "TPL-143",
+          "specialty": "متاحف",
+          "name": "تجهيز معرض متحفي"
+        },
+        {
+          "template_id": "TPL-144",
+          "specialty": "تراث",
+          "name": "ترميم مبنى تراثي"
+        },
+        {
+          "template_id": "TPL-145",
+          "specialty": "زوار",
+          "name": "إنشاء مركز زوار"
+        },
+        {
+          "template_id": "TPL-146",
+          "specialty": "ثقافة",
+          "name": "تنظيم فعالية ثقافية"
+        },
+        {
+          "template_id": "TPL-147",
+          "specialty": "إرشاد",
+          "name": "تركيب لوحات إرشادية سياحية"
+        },
+        {
+          "template_id": "TPL-148",
+          "specialty": "حجوزات",
+          "name": "إنشاء منصة حجز أنشطة سياحية"
+        },
+        {
+          "template_id": "TPL-149",
+          "specialty": "هوية",
+          "name": "تنظيم مهرجان تراثي"
+        },
+        {
+          "template_id": "TPL-150",
+          "specialty": "موسمية",
+          "name": "تطوير برنامج أنشطة شتوية"
+        }
+      ]
+    },
+    {
+      "id": "events",
+      "name_ar": "الفعاليات والبروتوكول",
+      "template_count": 10,
+      "specialties": [
+        "اتفاقيات",
+        "افتتاح",
+        "تكريم",
+        "حوار",
+        "مؤتمرات",
+        "مجتمع",
+        "معارض",
+        "ملتقيات",
+        "مناسبات",
+        "منتديات"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-151",
+          "specialty": "مؤتمرات",
+          "name": "تنظيم مؤتمر حكومي"
+        },
+        {
+          "template_id": "TPL-152",
+          "specialty": "افتتاح",
+          "name": "تنظيم افتتاح مبنى رسمي"
+        },
+        {
+          "template_id": "TPL-153",
+          "specialty": "معارض",
+          "name": "إقامة معرض مشاريع حكومية"
+        },
+        {
+          "template_id": "TPL-154",
+          "specialty": "ملتقيات",
+          "name": "تنظيم ملتقى الجهات المشتركة"
+        },
+        {
+          "template_id": "TPL-155",
+          "specialty": "تكريم",
+          "name": "تنظيم حفل تكريم موظفين"
+        },
+        {
+          "template_id": "TPL-156",
+          "specialty": "مناسبات",
+          "name": "تنفيذ فعالية اليوم الوطني"
+        },
+        {
+          "template_id": "TPL-157",
+          "specialty": "مجتمع",
+          "name": "إقامة حملة مجتمعية"
+        },
+        {
+          "template_id": "TPL-158",
+          "specialty": "اتفاقيات",
+          "name": "تنظيم مراسم توقيع اتفاقية"
+        },
+        {
+          "template_id": "TPL-159",
+          "specialty": "منتديات",
+          "name": "إقامة منتدى ابتكار"
+        },
+        {
+          "template_id": "TPL-160",
+          "specialty": "حوار",
+          "name": "تنظيم لقاء حكومي مفتوح"
+        }
+      ]
+    },
+    {
+      "id": "transport",
+      "name_ar": "النقل والمرور",
+      "template_count": 10,
+      "specialties": [
+        "أسطول",
+        "تطبيقات",
+        "تقاطعات",
+        "تنقل",
+        "حافلات",
+        "عبور",
+        "مخالفات",
+        "مدارس",
+        "مسارات",
+        "مواقف"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-161",
+          "specialty": "حافلات",
+          "name": "توريد حافلات نقل حكومي"
+        },
+        {
+          "template_id": "TPL-162",
+          "specialty": "مسارات",
+          "name": "إعادة تنظيم خطوط الحافلات"
+        },
+        {
+          "template_id": "TPL-163",
+          "specialty": "مواقف",
+          "name": "تركيب نظام مواقف ذكية"
+        },
+        {
+          "template_id": "TPL-164",
+          "specialty": "مخالفات",
+          "name": "رقمنة إجراءات المخالفات المرورية"
+        },
+        {
+          "template_id": "TPL-165",
+          "specialty": "مدارس",
+          "name": "مشروع تحسين سلامة محيط المدارس"
+        },
+        {
+          "template_id": "TPL-166",
+          "specialty": "تنقل",
+          "name": "إعداد خطة تنقل حكومية"
+        },
+        {
+          "template_id": "TPL-167",
+          "specialty": "أسطول",
+          "name": "تطوير نظام فحص أسطول المركبات"
+        },
+        {
+          "template_id": "TPL-168",
+          "specialty": "تطبيقات",
+          "name": "تطوير تطبيق خدمة النقل"
+        },
+        {
+          "template_id": "TPL-169",
+          "specialty": "عبور",
+          "name": "تحسين نقاط عبور المشاة"
+        },
+        {
+          "template_id": "TPL-170",
+          "specialty": "تقاطعات",
+          "name": "تحسين زمن الإشارات بالتقاطعات"
+        }
+      ]
+    },
+    {
+      "id": "governance",
+      "name_ar": "التطوير المؤسسي والابتكار",
+      "template_count": 10,
+      "specialties": [
+        "إجراءات",
+        "ابتكار",
+        "استراتيجية",
+        "بيروقراطية",
+        "تجربة",
+        "جوائز",
+        "حوكمة مشاريع",
+        "مخاطر",
+        "مختبر",
+        "نمذجة"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-171",
+          "specialty": "بيروقراطية",
+          "name": "مشروع تصفير البيروقراطية"
+        },
+        {
+          "template_id": "TPL-172",
+          "specialty": "حوكمة مشاريع",
+          "name": "إنشاء مكتب إدارة مشاريع"
+        },
+        {
+          "template_id": "TPL-173",
+          "specialty": "تجربة",
+          "name": "قياس تجربة المتعامل الحكومية"
+        },
+        {
+          "template_id": "TPL-174",
+          "specialty": "ابتكار",
+          "name": "إطلاق حاضنة ابتكار"
+        },
+        {
+          "template_id": "TPL-175",
+          "specialty": "إجراءات",
+          "name": "إعادة هندسة إجراء داخلي"
+        },
+        {
+          "template_id": "TPL-176",
+          "specialty": "استراتيجية",
+          "name": "إعداد استراتيجية جهة حكومية"
+        },
+        {
+          "template_id": "TPL-177",
+          "specialty": "مخاطر",
+          "name": "تطوير سجل مخاطر مؤسسي"
+        },
+        {
+          "template_id": "TPL-178",
+          "specialty": "جوائز",
+          "name": "إطلاق جائزة تميز حكومية"
+        },
+        {
+          "template_id": "TPL-179",
+          "specialty": "مختبر",
+          "name": "إنشاء مختبر ابتكار"
+        },
+        {
+          "template_id": "TPL-180",
+          "specialty": "نمذجة",
+          "name": "تطوير نموذج خدمة تجريبي"
+        }
+      ]
+    },
+    {
+      "id": "partnerships",
+      "name_ar": "العقود والشراكات",
+      "template_count": 10,
+      "specialties": [
+        "بحث",
+        "بيانات",
+        "تشغيل",
+        "تطوير",
+        "تعاون",
+        "تعهيد",
+        "خدمات",
+        "مذكرات",
+        "مرافق",
+        "مشتريات مشتركة"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-181",
+          "specialty": "تعاون",
+          "name": "إعداد اتفاقية تعاون حكومي"
+        },
+        {
+          "template_id": "TPL-182",
+          "specialty": "مرافق",
+          "name": "إبرام عقد إدارة مرافق"
+        },
+        {
+          "template_id": "TPL-183",
+          "specialty": "بحث",
+          "name": "إنشاء شراكة بحثية"
+        },
+        {
+          "template_id": "TPL-184",
+          "specialty": "تطوير",
+          "name": "تأسيس شراكة تطوير خدمة"
+        },
+        {
+          "template_id": "TPL-185",
+          "specialty": "مذكرات",
+          "name": "إعداد مذكرة تفاهم"
+        },
+        {
+          "template_id": "TPL-186",
+          "specialty": "تعهيد",
+          "name": "إعداد عقد تعهيد خدمة"
+        },
+        {
+          "template_id": "TPL-187",
+          "specialty": "تشغيل",
+          "name": "إبرام عقد تشغيل وصيانة"
+        },
+        {
+          "template_id": "TPL-188",
+          "specialty": "بيانات",
+          "name": "إعداد اتفاقية تبادل بيانات"
+        },
+        {
+          "template_id": "TPL-189",
+          "specialty": "مشتريات مشتركة",
+          "name": "تأسيس اتفاق شراء مشترك"
+        },
+        {
+          "template_id": "TPL-190",
+          "specialty": "خدمات",
+          "name": "وضع اتفاقية مستوى خدمة بين جهات"
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "name_ar": "البيانات والإحصاء والتحليلات",
+      "template_count": 10,
+      "specialties": [
+        "استبيانات",
+        "بيانات مفتوحة",
+        "تعداد",
+        "تكامل",
+        "تنبؤ",
+        "جودة",
+        "حوكمة",
+        "خرائط",
+        "مؤشرات",
+        "مستودعات"
+      ],
+      "templates": [
+        {
+          "template_id": "TPL-191",
+          "specialty": "مؤشرات",
+          "name": "إطلاق لوحة مؤشرات أداء حكومي"
+        },
+        {
+          "template_id": "TPL-192",
+          "specialty": "مستودعات",
+          "name": "إنشاء مستودع بيانات حكومي"
+        },
+        {
+          "template_id": "TPL-193",
+          "specialty": "تعداد",
+          "name": "تنفيذ حصر ميداني للخدمات"
+        },
+        {
+          "template_id": "TPL-194",
+          "specialty": "استبيانات",
+          "name": "تنفيذ مسح رضا المتعاملين"
+        },
+        {
+          "template_id": "TPL-195",
+          "specialty": "بيانات مفتوحة",
+          "name": "إطلاق بوابة بيانات مفتوحة"
+        },
+        {
+          "template_id": "TPL-196",
+          "specialty": "جودة",
+          "name": "برنامج تحسين جودة البيانات"
+        },
+        {
+          "template_id": "TPL-197",
+          "specialty": "تنبؤ",
+          "name": "تطوير نموذج توقع الطلب على الخدمات"
+        },
+        {
+          "template_id": "TPL-198",
+          "specialty": "تكامل",
+          "name": "ربط قواعد بيانات الجهات"
+        },
+        {
+          "template_id": "TPL-199",
+          "specialty": "حوكمة",
+          "name": "إنشاء دليل حوكمة البيانات"
+        },
+        {
+          "template_id": "TPL-200",
+          "specialty": "خرائط",
+          "name": "إنشاء لوحة تحليلات مكانية GIS"
+        }
+      ]
+    }
+  ]
+}
