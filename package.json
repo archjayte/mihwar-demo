@@ -1,0 +1,16 @@
+{
+  "name": "mihwar",
+  "version": "0.6.3",
+  "private": true,
+  "type": "module",
+  "description": "MIHWAR — multi-agency project governance platform (local demo build, synthetic data)",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node server/server.mjs",
+    "reset": "node scripts/reset-data.mjs",
+    "test": "node --test tests/api.test.mjs tests/acceptance.test.mjs tests/gaps.test.mjs tests/auth-files.test.mjs tests/relay.test.mjs tests/contract.test.mjs tests/store.test.mjs tests/seal.test.mjs tests/standards.test.mjs tests/scanner-real.test.mjs tests/atrest.test.mjs tests/ops.test.mjs tests/monitoring.test.mjs tests/client.test.mjs tests/templates.test.mjs tests/links.test.mjs",
+    "test:pg": "node --test tests/pg/rls.test.mjs",
+    "test:e2e": "node tests/e2e/smoke-views.mjs && node tests/e2e/assets-check.mjs",
+    "assets": "node scripts/build-assets.mjs"
+  }
+}

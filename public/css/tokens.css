@@ -1,0 +1,176 @@
+/* MIHWAR design tokens — swap this file to re-skin; dark theme overrides below. */
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/noto-kufi-arabic-arabic-400-normal.woff2) format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/noto-kufi-arabic-arabic-500-normal.woff2) format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/noto-kufi-arabic-arabic-700-normal.woff2) format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/noto-kufi-arabic-latin-400-normal.woff2) format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/noto-kufi-arabic-latin-700-normal.woff2) format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/alexandria-arabic-500-normal.woff2) format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/alexandria-arabic-700-normal.woff2) format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/alexandria-latin-500-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2212;
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/alexandria-latin-700-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2212;
+}
+
+:root {
+  --font-body: 'Noto Kufi Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  --font-head: 'Alexandria', 'Noto Kufi Arabic', 'Segoe UI', system-ui, sans-serif;
+
+  /* surfaces */
+  --bg: #f3f5f5;
+  --surface: #ffffff;
+  --surface-2: #f8faf9;
+  --sunken: #eaeeee;
+  --line: #dde3e3;
+  --line-strong: #c3cccc;
+  --control-border: #7a8a8a; /* >= 3:1 against surface and sunken (WCAG 1.4.11 non-text contrast) */
+
+  /* text */
+  --ink: #14262d;
+  --ink-2: #425760;
+  --ink-3: #526670;
+  --ink-inv: #ffffff;
+  --on-brand: #ffffff;
+
+  /* brand: deep sea-teal + signal amber (amber marks "the ball is with someone") */
+  --brand: #0f5b61;
+  --brand-hover: #0b484d;
+  --brand-tint: #e2f0ef;
+  --brand-ink: #0b3f43;
+  --side-bg: #11262d;
+  --side-ink: #c9d8db;
+  --side-ink-dim: #8aa0a6;
+  --side-active: #1d3d45;
+  --signal: #d98a00;
+  --signal-tint: #fff3d6;
+
+  /* semantic tones (fg on bg) */
+  --t-neutral-bg: #e9eded;
+  --t-neutral-fg: #3c4f56;
+  --t-info-bg: #e1ecf8;
+  --t-info-fg: #1d4f89;
+  --t-attention-bg: #fff0cc;
+  --t-attention-fg: #7a4d00;
+  --t-success-bg: #dff3e7;
+  --t-success-fg: #17613b;
+  --t-danger-bg: #fbe3df;
+  --t-danger-fg: #92291f;
+  --t-progress-bg: #dcf0f1;
+  --t-progress-fg: #0b5156;
+  --t-done-bg: #e4e8ea;
+  --t-done-fg: #55666d;
+  --danger: #b3382c;
+  --ok: #1f7a4d;
+
+  /* sizes */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --shadow-1: 0 1px 2px rgb(20 38 45 / 0.06), 0 1px 1px rgb(20 38 45 / 0.04);
+  --shadow-2: 0 8px 28px rgb(20 38 45 / 0.14), 0 2px 6px rgb(20 38 45 / 0.08);
+  --focus: 0 0 0 3px rgb(15 91 97 / 0.35);
+  --side-w: 244px;
+  --top-h: 58px;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.9375rem;
+  --fs-lg: 1.0625rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0d1a1f;
+  --surface: #14262d;
+  --surface-2: #112127;
+  --sunken: #0a1519;
+  --line: #254149;
+  --line-strong: #35565f;
+  --control-border: #688a94;
+  --ink: #e6eff0;
+  --ink-2: #b2c5c9;
+  --ink-3: #86a0a6;
+  --on-brand: #0a1519;
+  --brand: #3fb3b6;
+  --brand-hover: #5cc6c8;
+  --brand-tint: #17383d;
+  --brand-ink: #bfe8e9;
+  --side-bg: #0a1519;
+  --side-active: #17313a;
+  --signal: #f2b13a;
+  --signal-tint: #3a2e10;
+  --t-neutral-bg: #22363d;
+  --t-neutral-fg: #b9cacd;
+  --t-info-bg: #15304d;
+  --t-info-fg: #9cc4ee;
+  --t-attention-bg: #3d2f0c;
+  --t-attention-fg: #f1c871;
+  --t-success-bg: #12362a;
+  --t-success-fg: #8fdcb2;
+  --t-danger-bg: #43201c;
+  --t-danger-fg: #f2a69d;
+  --t-progress-bg: #123b3f;
+  --t-progress-fg: #8fdadd;
+  --t-done-bg: #1d2e34;
+  --t-done-fg: #93a9af;
+  --danger: #ef7b6e;
+  --ok: #55c58a;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 10px 30px rgb(0 0 0 / 0.55);
+  --focus: 0 0 0 3px rgb(63 179 182 / 0.45);
+}

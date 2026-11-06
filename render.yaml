@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: mihwar-demo
+    runtime: node
+    plan: free
+    buildCommand: "true"
+    startCommand: node server/server.mjs
+    healthCheckPath: /api/v1/system/notice
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.1
+      - key: MIHWAR_HOST
+        value: 0.0.0.0
+      - key: MIHWAR_DEMO
+        value: "1"
+      - key: MIHWAR_HTTPS
+        value: "1"
