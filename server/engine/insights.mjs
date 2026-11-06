@@ -449,13 +449,18 @@ export function registerInsights(E) {
                   ? 'عضو لجنة'
                   : 'منفّذ';
     // a light default: what needs me, my nearest work and dates; charts, activity and analysis widgets are one click away in «تخصيص الصفحة»
+    // few cards: what needs me, then one combined status card (late / on time / ahead per agency, and obstacles) for anyone following
+    // other people's work; everything else is one click away in «تخصيص الصفحة»
+    const followsWork = isCommittee || isCoord || isAuth || isSup || isAuditor || E.hasRole(u, 'INDEPENDENT_REVIEWER');
     const order = isTriage
-      ? ['action_center', 'kpis', 'pipeline', 'projects', 'upcoming']
+      ? ['status', 'action_center', 'pipeline']
       : isCoord
-        ? ['action_center', 'kpis', 'projects', 'upcoming']
+        ? ['status', 'action_center', 'projects']
         : isAuth || isSup
-          ? ['action_center', 'kpis', 'my_tasks', 'pipeline', 'upcoming']
-          : ['action_center', 'kpis', 'my_tasks', 'upcoming', 'projects'];
+          ? ['status', 'action_center', 'my_tasks']
+          : followsWork
+            ? ['status', 'action_center']
+            : ['action_center', 'kpis', 'my_tasks', 'upcoming'];
 
     // ---- first-steps guide (dismissable)
     const guide = S.prefs[u.id]?.dismissed_guide
@@ -660,8 +665,107 @@ export function registerInsights(E) {
       .filter((x) => x.open)
       .sort((a, b) => b.days - a.days);
     const charts = { wp_status, tasks_status, due_weeks, delay_org, scurve, pipeline };
+
+    // ---- «الوضع العام»: one card for those who follow other people's work (committee, coordinator, agency head/supervisor, auditor).
+    // Each open work package is late, on time or ahead by comparing its reported progress with where its plan says it should be today:
+    //   late  = past its planned end and not delivered, or more than 10 points behind the expected progress;
+    //   ahead = more than 10 points ahead of the expected progress, or delivered before its planned end;
+    //   on time = everything else (including packages whose start date has not come yet).
+    const DAY_MS = 86400000;
+    const dayNo = (s) => Math.floor(new Date(`${s}T00:00:00Z`).getTime() / DAY_MS);
+    const paceOf = (w) => {
+      const delivered = ['ORG_SUBMITTED', 'ACCEPTED', 'CLOSED'].includes(w.status);
+      const start = dayNo(w.planned_start);
+      const end = dayNo(w.planned_end);
+      const now = dayNo(today);
+      if (delivered) return (w.submitted_at || today).slice(0, 10) < w.planned_end ? 'ahead' : 'on_time';
+      if (now > end || E.wpDelay(w).accountable > 0) return 'late';
+      const expected = now < start ? 0 : Math.min(100, ((now - start + 1) / Math.max(1, end - start + 1)) * 100);
+      const actual = w.self_pct || 0;
+      if (actual < expected - 10) return 'late';
+      if (actual > expected + 10) return 'ahead';
+      return 'on_time';
+    };
+    const showStatus = isCommittee || isCoord || isAuth || isSup || isAuditor || E.hasRole(u, 'INDEPENDENT_REVIEWER');
+    let status = null;
+    if (showStatus) {
+      const open = wpsV.filter((w) => w.status !== 'CLOSED' && w.status !== 'ACCEPTED' && w.planned_start && w.planned_end);
+      const paced = open.map((w) => ({ w, pace: paceOf(w) }));
+      const count = (arr, k) => arr.filter((x) => x.pace === k).length;
+      const byOrg = uniq(paced.map((x) => x.w.owner_org_id))
+        .map((o) => {
+          const mine = paced.filter((x) => x.w.owner_org_id === o);
+          return {
+            org: E.oname(o),
+            mine: o === u.org_id,
+            late: count(mine, 'late'),
+            on_time: count(mine, 'on_time'),
+            ahead: count(mine, 'ahead'),
+            delay_days: sum(mine.map((x) => E.wpDelay(x.w).accountable)),
+            blockers: S.issues.filter(
+              (i) => ['OPEN', 'PROPOSED'].includes(i.status) && mine.some((x) => x.w.id === i.wp_id),
+            ).length,
+          };
+        })
+        .sort((a, b) => b.late - a.late || b.delay_days - a.delay_days);
+      // the leader's own organisation also sees its internal tasks (never another organisation's)
+      const ownTasks =
+        isAuth || isSup
+          ? (() => {
+              const t = S.tasks.filter(
+                (x) => x.org_id === u.org_id && !['DONE_INTERNAL', 'CANCELLED'].includes(x.status) && x.planned_end,
+              );
+              return { late: t.filter((x) => x.planned_end < today).length, open: t.length };
+            })()
+          : null;
+      const openIssues = S.issues.filter((i) => pids.includes(i.project_id) && ['OPEN', 'PROPOSED'].includes(i.status));
+      status = {
+        totals: { late: count(paced, 'late'), on_time: count(paced, 'on_time'), ahead: count(paced, 'ahead') },
+        by_org: byOrg,
+        own_tasks: ownTasks,
+        late_items: paced
+          .filter((x) => x.pace === 'late')
+          .map((x) => ({ x, d: E.wpDelay(x.w) }))
+          .sort((a, b) => b.d.accountable - a.d.accountable || a.x.w.planned_end.localeCompare(b.x.w.planned_end))
+          .slice(0, 5)
+          .map(({ x, d }) => ({
+            ref: x.w.ref,
+            title: x.w.title,
+            org: E.oname(x.w.owner_org_id),
+            end: x.w.planned_end,
+            pct: x.w.self_pct || 0,
+            // past its end date → days over; otherwise how far progress is behind the plan
+            overdue_days: Math.max(0, dayNo(today) - dayNo(x.w.planned_end)),
+            expected_pct: Math.round(
+              Math.min(
+                100,
+                ((dayNo(today) - dayNo(x.w.planned_start) + 1) /
+                  Math.max(1, dayNo(x.w.planned_end) - dayNo(x.w.planned_start) + 1)) *
+                  100,
+              ),
+            ),
+            delay_days: d.accountable,
+            link: `#/p/${x.w.project_id}/board?wp=${x.w.id}`,
+          })),
+        blockers: {
+          total: openIssues.length,
+          items: openIssues
+            .sort((a, b) => (b.days || 0) - (a.days || 0))
+            .slice(0, 4)
+            .map((i) => ({
+              title: i.title,
+              org: E.oname(E.wp(i.wp_id)?.owner_org_id),
+              wp_ref: E.wp(i.wp_id)?.ref,
+              days: i.days || 0,
+              proposed: i.status === 'PROPOSED',
+              link: `#/p/${i.project_id}/timeline`,
+            })),
+        },
+      };
+    }
     const catalog = [
       'action_center',
+      ...(status ? ['status'] : []),
       'charts',
       'pipeline',
       'projects',
@@ -690,6 +794,7 @@ export function registerInsights(E) {
       today,
       widgets: {
         action_center: { items: act.slice(0, 12), total: act.length },
+        status,
         kpis: k,
         pipeline,
         projects: projectCards,

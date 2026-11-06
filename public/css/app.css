@@ -4101,3 +4101,138 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 12px;
 }
+
+/* «الوضع العام» — late / on time / ahead per agency and open obstacles, in one card */
+.pace-head {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.pace-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border-inline-start: 4px solid var(--line-strong);
+}
+.pace-stat b {
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+.pace-stat span {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+.pace-stat.late {
+  border-color: var(--danger);
+}
+.pace-stat.late b,
+.pace-tbl .late,
+.own-tasks .late,
+.late-tag {
+  color: var(--danger);
+}
+.pace-stat.ok {
+  border-color: var(--ok);
+}
+.pace-stat.ahead {
+  border-color: #2f6fb3;
+}
+.pace-stat.ahead b,
+.pace-tbl .ahead {
+  color: #2f6fb3;
+}
+.pace-stat.block {
+  border-color: var(--signal);
+}
+:root[data-theme='dark'] .pace-stat.ahead b,
+:root[data-theme='dark'] .pace-tbl .ahead {
+  color: #8cbcf0;
+}
+.pace-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--sunken);
+  gap: 2px;
+}
+.pace-seg.late {
+  background: var(--danger);
+}
+.pace-seg.ok {
+  background: var(--ok);
+}
+.pace-seg.ahead {
+  background: #2f6fb3;
+}
+.pace-tbl td.c,
+.pace-tbl th:not(:first-child) {
+  text-align: center;
+}
+.pace-tbl tr.mine td {
+  background: var(--brand-tint);
+}
+.mini-h {
+  font-size: var(--fs-sm);
+  margin: 0 0 6px;
+  color: var(--ink-2);
+}
+.mini-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.mini-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 4px;
+  border-block-end: 1px solid var(--line);
+  min-width: 0;
+  cursor: pointer;
+}
+.mini-list li:last-child {
+  border-block-end: 0;
+}
+.mini-list li:hover {
+  background: var(--surface-2);
+}
+.own-tasks {
+  color: var(--ink-2);
+}
+@media (max-width: 560px) {
+  .pace-head {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* no side widgets → the main column takes the full width */
+.home-grid:has(> .stack:last-child:empty) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.actions-list .show-all {
+  margin: 8px 16px 12px;
+}
+.pace-tbl th,
+.pace-tbl td {
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
+  padding: 8px 6px;
+}
+.pace-tbl td:first-child {
+  white-space: normal;
+}
+@media (max-width: 560px) {
+  .pace-tbl {
+    font-size: var(--fs-xs);
+  }
+  .pace-tbl th .sort-ind,
+  .pace-tbl th [aria-hidden='true'] {
+    display: none;
+  }
+}

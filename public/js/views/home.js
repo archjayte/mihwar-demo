@@ -6,6 +6,7 @@ import { chartCard, donut, hbars, columns, lines, legend, applyWidths } from '..
 const TITLES = {
   charts: 'الرسوم البيانية',
   action_center: 'ما ينتظرني الآن',
+  status: 'الوضع العام',
   my_tasks: 'مهامي القريبة',
   pipeline: 'مسار الطلبات',
   projects: 'المشاريع',
@@ -222,19 +223,21 @@ export async function homeView({ ctx, refresh, go }) {
       queueMicrotask(() => applyWidths(grid));
       return grid;
     },
+    // five at a time; the rest behind one «عرض الكل» so the list never pushes everything else off the page
     action_center: (w) =>
       section(
-        TITLES.action_center,
+        `${TITLES.action_center}${w.total ? ` (${w.total})` : ''}`,
         w.items.length
           ? h(
               'div',
               { class: 'actions-list', style: { margin: '-16px' } },
-              w.items.map((a) =>
+              w.items.map((a, i) =>
                 h(
                   'a',
                   {
                     class: `act${a.urgency === 'high' ? ' high' : ''}`,
                     href: a.link,
+                    hidden: i >= 5 ? true : null,
                     style: { color: 'inherit', textDecoration: 'none' },
                   },
                   h(
@@ -262,6 +265,20 @@ export async function homeView({ ctx, refresh, go }) {
                   h('span', { class: 'btn sm primary' }, a.cta),
                 ),
               ),
+              w.items.length > 5
+                ? h(
+                    'button',
+                    {
+                      type: 'button',
+                      class: 'btn ghost sm show-all',
+                      onclick: (e) => {
+                        e.currentTarget.parentElement.querySelectorAll('.act[hidden]').forEach((x) => (x.hidden = false));
+                        e.currentTarget.remove();
+                      },
+                    },
+                    `عرض الكل (${w.items.length})`,
+                  )
+                : null,
             )
           : h(
               'div',
@@ -269,7 +286,6 @@ export async function homeView({ ctx, refresh, go }) {
               h('b', null, 'لا شيء ينتظرك'),
               'عندما تصبح الكرة عندك في طلب أو مراجعة أو تصريح سيظهر هنا بإجراء واحد واضح.',
             ),
-        w.total > w.items.length ? h('span', { class: 'badge t-attention' }, `${w.total} إجراء`) : null,
       ),
     pipeline: (w) =>
       section(
@@ -520,6 +536,114 @@ export async function homeView({ ctx, refresh, go }) {
             h('p', { class: 'xs muted' }, 'الخط الرأسي = اليوم. افتح الخط الزمني الكامل من صفحة المشروع.'),
           )
         : null,
+    // one card instead of separate delay / obstacle / per-agency cards: the three-way pace split, a row per agency,
+    // then the most late items and the open obstacles side by side
+    status: (w) => {
+      if (!w) return null;
+      const t = w.totals;
+      const all = t.late + t.on_time + t.ahead;
+      if (!all && !w.blockers.total) return null;
+      const seg = (n, cls, label) =>
+        n ? h('span', { class: `pace-seg ${cls}`, style: { flexGrow: n }, title: `${label}: ${n}` }) : null;
+      const stat = (n, cls, label) => h('div', { class: `pace-stat ${cls}` }, h('b', { class: 'num' }, n), h('span', null, label));
+      const lateList = w.late_items.length
+        ? h(
+            'ul',
+            { class: 'mini-list' },
+            w.late_items.map((x) =>
+              h(
+                'li',
+                { class: 'click', onclick: () => go(x.link) },
+                h('div', { class: 'grow truncate' }, h('span', { class: 'small' }, x.title), h('div', { class: 'xs muted' }, `${x.org} · ${x.ref}`)),
+                h(
+                  'span',
+                  { class: 'xs late-tag' },
+                  x.overdue_days ? `متجاوز ${x.overdue_days} يوم` : `${x.pct}٪ من ${x.expected_pct}٪ مخطط`,
+                ),
+              ),
+            ),
+          )
+        : h('p', { class: 'small muted' }, 'لا بنود متأخرة.');
+      const blockList = w.blockers.items.length
+        ? h(
+            'ul',
+            { class: 'mini-list' },
+            w.blockers.items.map((x) =>
+              h(
+                'li',
+                { class: 'click', onclick: () => go(x.link) },
+                h('div', { class: 'grow truncate' }, h('span', { class: 'small' }, x.title), h('div', { class: 'xs muted' }, [x.org, x.wp_ref].filter(Boolean).join(' · '))),
+                h('span', { class: 'xs muted' }, x.proposed ? 'مقترح' : `${x.days} يوم`),
+              ),
+            ),
+          )
+        : h('p', { class: 'small muted' }, 'لا معوّقات مفتوحة.');
+      return section(
+        TITLES.status,
+        h(
+          'div',
+          { class: 'stack' },
+          h(
+            'div',
+            { class: 'pace-head' },
+            stat(t.late, 'late', 'متأخرة'),
+            stat(t.on_time, 'ok', 'في الموعد'),
+            stat(t.ahead, 'ahead', 'متقدمة'),
+            stat(w.blockers.total, 'block', 'معوّقات'),
+          ),
+          all
+            ? h(
+                'div',
+                { class: 'pace-bar', role: 'img', 'aria-label': `متأخرة ${t.late}، في الموعد ${t.on_time}، متقدمة ${t.ahead}` },
+                seg(t.late, 'late', 'متأخرة'),
+                seg(t.on_time, 'ok', 'في الموعد'),
+                seg(t.ahead, 'ahead', 'متقدمة'),
+              )
+            : null,
+          w.by_org.length
+            ? h(
+                'table',
+                { class: 'tbl pace-tbl no-stack' },
+                h('thead', null, h('tr', null, ['الجهة', 'متأخرة', 'في الموعد', 'متقدمة', 'معوّقات'].map((x) => h('th', null, x)))),
+                h(
+                  'tbody',
+                  null,
+                  w.by_org.map((o) =>
+                    h(
+                      'tr',
+                      { class: o.mine ? 'mine' : null },
+                      h('td', null, o.org, o.mine ? h('span', { class: 'xs muted' }, ' (جهتي)') : null),
+                      h('td', { class: o.late ? 'c late' : 'c muted' }, h('b', { class: 'num' }, o.late)),
+                      h('td', { class: 'c' }, h('span', { class: 'num' }, o.on_time)),
+                      h('td', { class: o.ahead ? 'c ahead' : 'c muted' }, h('span', { class: 'num' }, o.ahead)),
+                      h('td', { class: o.blockers ? 'c' : 'c muted' }, h('span', { class: 'num' }, o.blockers)),
+                    ),
+                  ),
+                ),
+              )
+            : null,
+          w.own_tasks?.open
+            ? h(
+                'a',
+                { class: 'small own-tasks', href: '#/tasks?scope=all' },
+                `مهام جهتي الداخلية: ${w.own_tasks.open} مفتوحة، منها `,
+                h('b', { class: w.own_tasks.late ? 'late' : '' }, `${w.own_tasks.late} متأخرة`),
+              )
+            : null,
+          h(
+            'div',
+            { class: 'grid c2' },
+            h('div', null, h('h3', { class: 'mini-h' }, 'الأكثر تأخرًا'), lateList),
+            h('div', null, h('h3', { class: 'mini-h' }, `المعوّقات المفتوحة (${w.blockers.total})`), blockList),
+          ),
+          h(
+            'p',
+            { class: 'xs muted' },
+            'متأخرة: تجاوزت موعدها أو إنجازها أقل من المخطط بأكثر من ١٠ نقاط. متقدمة: أعلى من المخطط بأكثر من ١٠ نقاط أو سُلّمت قبل موعدها.',
+          ),
+        ),
+      );
+    },
     delays: (w) =>
       w.length
         ? section(
@@ -704,7 +828,7 @@ export async function homeView({ ctx, refresh, go }) {
     ),
     guide,
     // only counters with something in them: a row of zeros is noise
-    d.widgets.kpis?.some((k) => k.value)
+    d.order.includes('kpis') && d.widgets.kpis?.some((k) => k.value)
       ? h(
           'div',
           { class: 'kpi-row' },

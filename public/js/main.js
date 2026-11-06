@@ -892,7 +892,7 @@ initA11y();
 let labelQueued = false;
 const labelTables = () => {
   labelQueued = false;
-  document.querySelectorAll('table.tbl').forEach((tb) => {
+  document.querySelectorAll('table.tbl:not(.no-stack)').forEach((tb) => {
     const heads = [...tb.querySelectorAll('thead th')].map((th) => th.textContent.trim());
     if (!heads.length) return;
     tb.classList.add('tbl-stack');
