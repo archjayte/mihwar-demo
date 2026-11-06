@@ -443,13 +443,31 @@ export function createEngine({
     if (E.hasRole(u, 'SUPER_ADMIN')) return ['home', 'settings'];
     const inCommittee = state.projects.some((p) => E.committeeRole(u, p));
     const orgPart = state.projects.some((p) => E.orgParticipates(u.org_id, p));
-    const nav = ['home', 'projects', 'templates'];
-    if (orgPart || inCommittee) nav.push('requests');
+    const delegated = state.delegations.some((d) => d.user_id === u.id && !d.revoked);
+    // an organisation leader prepares and answers requests, commits the organisation and follows its decisions;
+    // a plain executive (منفّذ) only works on the tasks assigned to them, so the menu shows that work and nothing else
+    const leader = E.hasRole(u, 'ORG_SUPERVISOR', 'ORG_ADMIN') || delegated;
+    const executiveOnly =
+      !inCommittee &&
+      !leader &&
+      !E.hasRole(
+        u,
+        'COORDINATING_ADMIN',
+        'FINAL_AUDITOR',
+        'INDEPENDENT_REVIEWER',
+        'PLATFORM_OWNER_ADMIN',
+        'SCOPED_VIEWER',
+        'TEMPLATE_CATALOG_EDITOR',
+        'TEMPLATE_REVIEWER',
+      );
+    const nav = ['home', 'projects'];
+    if (!executiveOnly && !E.hasRole(u, 'FINAL_AUDITOR', 'INDEPENDENT_REVIEWER')) nav.push('templates');
+    if ((orgPart && !executiveOnly) || inCommittee) nav.push('requests');
     if (inCommittee) nav.push('committee');
     if (orgPart) nav.push('tasks');
-    if (orgPart || inCommittee) nav.push('commitments');
+    if ((orgPart && !executiveOnly) || inCommittee) nav.push('commitments');
     if (orgPart || inCommittee || E.hasRole(u, 'FINAL_AUDITOR', 'INDEPENDENT_REVIEWER')) nav.push('messages');
-    nav.push('reports');
+    if (!executiveOnly) nav.push('reports');
     if (orgPart && E.hasRole(u, 'ORG_SUPERVISOR', 'ORG_ADMIN')) nav.splice(nav.indexOf('tasks') + 1, 0, 'orgtasks');
     if (
       inCommittee ||
@@ -464,7 +482,7 @@ export function createEngine({
       state.delegations.some((d) => d.user_id === u.id && !d.revoked)
     )
       nav.splice(nav.indexOf('projects') + 1, 0, 'overview');
-    if (!E.hasRole(u, 'SUPER_ADMIN', 'PLATFORM_OWNER_ADMIN'))
+    if (!executiveOnly && !E.hasRole(u, 'SUPER_ADMIN', 'PLATFORM_OWNER_ADMIN'))
       nav.splice(nav.indexOf('reports'), 0, 'decisions', 'evidence');
     if (
       inCommittee ||

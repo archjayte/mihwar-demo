@@ -676,7 +676,10 @@ export function registerInsights(E) {
       'deliverables',
       'meetings',
       'comments',
-    ];
+    ].filter(
+      // a plain executive cannot add the organisation-level widgets (request pipeline, team load, response times, declines, committee minutes)
+      (w) => persona !== 'منفّذ' || !['pipeline', 'workload', 'sla', 'decline', 'meetings'].includes(w),
+    );
     return {
       persona,
       order,

@@ -802,9 +802,18 @@ async function route() {
   if (key === 'requests' && parts[1]) view = requestView;
   if (key === 'tasks' && query.scope === 'all' && ctx.nav.includes('orgtasks')) cur = 'orgtasks';
   if (key === 'p' && parts[2] === 'committee') cur = 'committee';
-  if (!ctx.nav.includes(cur) && cur !== 'home' && !(cur === 'committee')) {
-    /* still render; the server decides access */
-  }
+  // a section that is not in this person's menu is not theirs: say so instead of showing an empty or half-usable page.
+  // Deep links to a single record (a request from a notification, a project) still open; the server decides access.
+  if (NAV[cur] && !ctx.nav.includes(cur) && cur !== 'home' && cur !== 'committee' && key !== 'p' && !parts[1])
+    view = async () => ({
+      title: NAV[cur][0],
+      el: emptyState(
+        'هذا القسم خارج صلاحياتك',
+        'تظهر لك في القائمة الأقسام المرتبطة بدورك فقط. إن كنت تحتاج هذا القسم فاطلب الصلاحية من مدير جهتك.',
+        h('a', { class: 'btn primary', href: '#/' }, 'العودة إلى الرئيسية'),
+        'no-access',
+      ),
+    });
   const content = h('div', { id: 'view' }, h('div', { class: 'empty' }, 'جارٍ التحميل…'));
   mount(app, shell(content, cur));
   if (!firstPaint && !$('#layer')?.children.length) $('#main')?.focus({ preventScroll: true }); // never pull focus out of an open dialog // first load keeps the skip link as the first tab stop; later navigations move focus to the content

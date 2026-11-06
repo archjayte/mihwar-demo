@@ -303,6 +303,8 @@ export async function projectView({ parts, query, ctx, go, refresh }) {
     ['requests', 'الطلبات'],
   ];
   if (p.caps.committee_role || ctx.me.user.roles.includes('FINAL_AUDITOR')) tabs.splice(5, 0, ['committee', 'اللجنة']);
+  // a plain executive has no request work: the project's request list stays out of their tabs (as it is out of their menu)
+  if (!ctx.nav.includes('requests')) tabs.splice(tabs.findIndex((x) => x[0] === 'requests'), 1);
   lastTabs = tabs.map((x) => x[0]);
   lastProject = id;
   try {
