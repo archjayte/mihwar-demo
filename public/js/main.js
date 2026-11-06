@@ -50,11 +50,9 @@ const NAV = {
   settings: ['الإعدادات', 'gear', '#/settings'],
 };
 
-const SECTIONS = [
-  ['العمل', ['home', 'overview', 'projects', 'templates', 'requests', 'committee', 'tasks', 'orgtasks', 'commitments']],
-  ['التواصل والتقارير', ['messages', 'decisions', 'evidence', 'reports']],
-  ['الحوكمة', ['governance', 'settings']],
-];
+// The menu shows the daily work first; less frequent sections sit under one collapsible «المزيد» group (settings live in the user menu).
+const PRIMARY = ['home', 'projects', 'requests', 'committee', 'tasks', 'messages'];
+const MORE = ['overview', 'orgtasks', 'commitments', 'decisions', 'evidence', 'reports', 'templates', 'governance'];
 try {
   if (localStorage.getItem('mihwar.side') === '1') document.documentElement.classList.add('side-collapsed');
 } catch {
@@ -172,36 +170,45 @@ function shell(content, current) {
     })
     .filter(Boolean);
   const isCurrent = (k) => k === current;
+  const navLink = (n) =>
+    h(
+      'a',
+      {
+        href: n.href,
+        title: n.label,
+        'aria-current': isCurrent(n.k) ? 'page' : null,
+        onclick: () => $('#side').classList.remove('open'),
+      },
+      icon(n.ic),
+      h('span', null, n.label),
+      n.k === 'messages' && me.unread_messages ? h('span', { class: 'count' }, me.unread_messages) : null,
+    );
+  const mainLinks = navLinks.filter((n) => PRIMARY.includes(n.k));
+  const moreLinks = navLinks.filter((n) => MORE.includes(n.k));
+  const moreOpen = moreLinks.some((n) => isCurrent(n.k)) || lsj('mihwar.more', false);
+  const more = moreLinks.length
+    ? h(
+        'details',
+        {
+          class: 'nav-more',
+          open: moreOpen,
+          ontoggle: (e) => {
+            try {
+              localStorage.setItem('mihwar.more', JSON.stringify(e.currentTarget.open));
+            } catch {
+              /* ignore */
+            }
+          },
+        },
+        h('summary', { title: 'المزيد' }, icon('menu', 20), h('span', null, 'المزيد'), icon('chev', 14)),
+        moreLinks.map(navLink),
+      )
+    : null;
   const side = h(
     'aside',
     { class: 'side', id: 'side', 'aria-label': 'القائمة الرئيسية' },
     h('div', { class: 'brand' }, logoMark(), h('div', null, 'محور', h('small', null, 'حوكمة المشاريع المشتركة'))),
-    h(
-      'nav',
-      { class: 'nav' },
-      SECTIONS.flatMap(([title, keys]) => {
-        const ls = navLinks.filter((n) => keys.includes(n.k));
-        return ls.length
-          ? [
-              h('div', { class: 'nav-sec' }, title),
-              ...ls.map((n) =>
-                h(
-                  'a',
-                  {
-                    href: n.href,
-                    title: n.label,
-                    'aria-current': isCurrent(n.k) ? 'page' : null,
-                    onclick: () => $('#side').classList.remove('open'),
-                  },
-                  icon(n.ic),
-                  h('span', null, n.label),
-                  n.k === 'messages' && me.unread_messages ? h('span', { class: 'count' }, me.unread_messages) : null,
-                ),
-              ),
-            ]
-          : [];
-      }),
-    ),
+    h('nav', { class: 'nav' }, mainLinks.map(navLink), more),
     projectTree(),
     h(
       'button',
@@ -222,22 +229,6 @@ function shell(content, current) {
       },
       icon('menu', 18),
       h('span', null, 'طي القائمة'),
-    ),
-    h(
-      'div',
-      { class: 'side-foot' },
-      h('b', null, me.user.name),
-      h('div', null, `${me.user.title} — ${me.user.org_name}`),
-      me.committee.length
-        ? h(
-            'div',
-            null,
-            me.committee
-              .map((c) => c.label)
-              .filter((x, i, a) => a.indexOf(x) === i)
-              .join('، '),
-          )
-        : null,
     ),
   );
   const bottom = h(

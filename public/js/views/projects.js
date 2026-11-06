@@ -366,14 +366,20 @@ export async function projectView({ parts, query, ctx, go, refresh }) {
         'div',
         { class: 'page-head-main' },
         h('h1', null, p.name),
-        h('div', { class: 'sub' }, `${p.orgs.map((o) => o.name).join(' · ')}`),
+        // one short line instead of every agency name: the full list is on the overview tab and in the tooltip
+        h(
+          'div',
+          { class: 'sub', title: p.orgs.map((o) => o.name).join(' · ') },
+          `${p.orgs.length} جهات مشاركة · الإنجاز المعتمد ${p.progress.verified}% · ينتهي ${fmtDate(p.end)}`,
+        ),
       ),
       switcher,
       pinBtn,
       badge(sl, st),
-      !p.baseline_frozen ? badge('الخطة غير معتمدة', 'attention') : badge('الخطة معتمدة', 'success'),
+      !p.baseline_frozen ? badge('الخطة غير معتمدة', 'attention') : null,
     ),
-    h(
+    // the summary card belongs to the overview; the working tabs (board, timeline…) start straight with their content
+    tab !== 'overview' ? null : h(
       'div',
       { class: 'card pad' },
       h(

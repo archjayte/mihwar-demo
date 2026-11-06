@@ -448,13 +448,14 @@ export function registerInsights(E) {
                 : isCommittee
                   ? 'عضو لجنة'
                   : 'منفّذ';
+    // a light default: what needs me, my nearest work and dates; charts, activity and analysis widgets are one click away in «تخصيص الصفحة»
     const order = isTriage
-      ? ['action_center', 'kpis', 'charts', 'pipeline', 'projects', 'upcoming', 'sla', 'decline', 'activity']
+      ? ['action_center', 'kpis', 'pipeline', 'projects', 'upcoming']
       : isCoord
-        ? ['action_center', 'kpis', 'charts', 'projects', 'pipeline', 'upcoming', 'activity', 'decline']
+        ? ['action_center', 'kpis', 'projects', 'upcoming']
         : isAuth || isSup
-          ? ['action_center', 'kpis', 'charts', 'my_tasks', 'pipeline', 'workload', 'upcoming', 'projects', 'activity']
-          : ['action_center', 'kpis', 'charts', 'my_tasks', 'upcoming', 'projects', 'activity'];
+          ? ['action_center', 'kpis', 'my_tasks', 'pipeline', 'upcoming']
+          : ['action_center', 'kpis', 'my_tasks', 'upcoming', 'projects'];
 
     // ---- first-steps guide (dismissable)
     const guide = S.prefs[u.id]?.dismissed_guide

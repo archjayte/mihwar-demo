@@ -703,11 +703,12 @@ export async function homeView({ ctx, refresh, go }) {
       ),
     ),
     guide,
-    d.widgets.kpis?.length
+    // only counters with something in them: a row of zeros is noise
+    d.widgets.kpis?.some((k) => k.value)
       ? h(
           'div',
-          { class: 'grid c4 keep2' },
-          d.widgets.kpis.map((k) =>
+          { class: 'kpi-row' },
+          d.widgets.kpis.filter((k) => k.value).map((k) =>
             h(
               'a',
               {

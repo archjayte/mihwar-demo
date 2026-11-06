@@ -4042,3 +4042,62 @@ main {
   max-width: 100%;
   overflow-x: clip;
 }
+
+/* ---------- lighter layout (0.6.5) ----------
+   Fewer things on screen at once: a short main menu with a collapsible «المزيد», non-zero counters only, a slimmer demo strip. */
+.nav {
+  gap: 1px;
+}
+.nav-more {
+  margin-block-start: 6px;
+  padding-block-start: 6px;
+  border-block-start: 1px solid rgb(255 255 255 / 0.08);
+}
+.nav-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  color: var(--side-ink-dim);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  list-style: none;
+}
+.nav-more > summary::-webkit-details-marker {
+  display: none;
+}
+.nav-more > summary:hover {
+  background: rgb(255 255 255 / 0.06);
+  color: var(--side-ink);
+}
+.nav-more > summary svg:last-child {
+  margin-inline-start: auto;
+  transform: rotate(-90deg);
+  transition: transform 0.15s;
+}
+.nav-more[open] > summary svg:last-child {
+  transform: rotate(90deg);
+}
+.nav-more > a {
+  font-size: var(--fs-sm);
+}
+.side-collapsed .nav-more > summary span,
+.side-collapsed .nav-more > summary svg:last-child {
+  display: none;
+}
+.side-toggle {
+  margin-block-start: auto;
+}
+.proj-tree {
+  margin-block-start: 8px;
+}
+.demo-bar {
+  font-size: 0.7rem;
+  padding: 2px 10px;
+}
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}

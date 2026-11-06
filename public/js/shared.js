@@ -105,15 +105,8 @@ export function reqRow(r, me) {
         h('span', { class: 'ttl' }, r.title),
         mine ? badge('عندكم', 'attention') : null,
       ),
+      // the services requested are listed on the request itself; the row keeps only what tells requests apart
       h('div', { class: 'xs muted' }, `${r.ref} · ${r.project_name} · `, orgRoute(r)),
-      h(
-        'div',
-        { class: 'xs', style: { marginBlockStart: '2px' } },
-        r.items
-          .map((i) => i.service_label)
-          .filter((x, i, a) => a.indexOf(x) === i)
-          .join('، '),
-      ),
     ),
     h(
       'div',
