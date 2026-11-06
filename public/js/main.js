@@ -888,6 +888,26 @@ document.addEventListener('keydown', (e) => {
 
 route();
 initA11y();
+// Tables reflow into labelled cards on narrow screens instead of scrolling sideways: each cell carries its column header.
+let labelQueued = false;
+const labelTables = () => {
+  labelQueued = false;
+  document.querySelectorAll('table.tbl').forEach((tb) => {
+    const heads = [...tb.querySelectorAll('thead th')].map((th) => th.textContent.trim());
+    if (!heads.length) return;
+    tb.classList.add('tbl-stack');
+    tb.querySelectorAll('tbody tr').forEach((tr) =>
+      [...tr.children].forEach((td, i) => {
+        if (!td.hasAttribute('data-label') && !td.hasAttribute('colspan')) td.setAttribute('data-label', heads[i] || '');
+      }),
+    );
+  });
+};
+new MutationObserver(() => {
+  if (labelQueued) return;
+  labelQueued = true;
+  setTimeout(labelTables, 0);
+}).observe(document.body, { childList: true, subtree: true });
 // FORM-014: tell the person when the connection drops or returns; drafts stay in the open dialog and writes are retried with the same idempotency key
 window.addEventListener('offline', () =>
   toast('انقطع الاتصال. ما كتبتَه محفوظ في النافذة المفتوحة؛ أعد المحاولة عند عودة الاتصال.', 'err'),

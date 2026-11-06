@@ -1889,18 +1889,59 @@ async function timelineTab({ p, ctx, refresh }) {
   const items = t.items;
   const caps = t.caps;
   const KEY = `mihwar.tl.${p.id}`;
-  const S = { ppd: null, base: true, deps: false, crit: false, group: false, ...lsGet(KEY, {}) };
-  const persist = () => lsSet(KEY, { ppd: S.ppd, base: S.base, deps: S.deps, crit: S.crit, group: S.group });
+  const S = {
+    ppd: null,
+    base: true,
+    deps: false,
+    crit: false,
+    group: false,
+    period: 'all',
+    from: '',
+    to: '',
+    ...lsGet(KEY, {}),
+  };
+  const persist = () =>
+    lsSet(KEY, {
+      ppd: S.ppd,
+      base: S.base,
+      deps: S.deps,
+      crit: S.crit,
+      group: S.group,
+      period: S.period,
+      from: S.from,
+      to: S.to,
+    });
   const DAY = 86400000;
   const parse = (s) => new Date(s + 'T00:00:00Z').getTime();
   const fmtD = (ms) => new Date(ms).toISOString().slice(0, 10);
   const starts = items.flatMap((i) => [i.planned_start, i.baseline_start].filter(Boolean)).concat(t.project.start);
   const ends = items.flatMap((i) => [i.planned_end, i.baseline_end].filter(Boolean)).concat(t.project.end);
-  const min = Math.min(...starts.map(parse)) - 7 * DAY;
-  const max = Math.max(...ends.map(parse)) + 14 * DAY;
-  const span = Math.max(1, Math.round((max - min) / DAY));
+  const fullMin = Math.min(...starts.map(parse)) - 7 * DAY;
+  const fullMax = Math.max(...ends.map(parse)) + 14 * DAY;
   const avail = window.innerWidth >= 860 ? window.innerWidth - 244 - 48 - 230 - 24 : window.innerWidth - 130 - 28;
-  const fit = Math.max(2.5, Math.min(14, Math.floor((avail / span) * 10) / 10));
+  // the displayed period: the whole project, the next N months from today, or a custom [from, to) window
+  let min, max, span, fit;
+  const applyPeriod = () => {
+    const today = parse(t.today);
+    const addMonths = (ms, n) => {
+      const d = new Date(ms);
+      return Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + n, d.getUTCDate());
+    };
+    if (S.period === 'custom' && S.from && S.to && parse(S.to) > parse(S.from)) {
+      min = parse(S.from);
+      max = parse(S.to);
+    } else if (['3', '6', '12'].includes(S.period)) {
+      min = today - 14 * DAY;
+      max = addMonths(today, Number(S.period));
+    } else {
+      min = fullMin;
+      max = fullMax;
+    }
+    span = Math.max(1, Math.round((max - min) / DAY));
+    fit = Math.max(1.5, Math.min(40, Math.floor((avail / span) * 10) / 10));
+  };
+  applyPeriod();
+  const inPeriod = (i) => parse(i.planned_end) >= min && parse(i.planned_start) < max;
   const PRESETS = { week: 24, month: 7, quarter: 2.5 };
   let ppd = S.ppd || fit;
   const rtl = () => getComputedStyle(document.documentElement).direction === 'rtl';
@@ -1935,13 +1976,15 @@ async function timelineTab({ p, ctx, refresh }) {
 
   const holder = h('div');
   const status = h('div', { class: 'sr-only', role: 'status', 'aria-live': 'polite' });
-  const order = () =>
-    S.group
-      ? [...items].sort(
+  const order = () => {
+    const shown = S.period === 'all' ? items : items.filter(inPeriod);
+    return S.group
+      ? [...shown].sort(
           (a, b) =>
             a.owner_org_name.localeCompare(b.owner_org_name, 'ar') || a.planned_start.localeCompare(b.planned_start),
         )
-      : items;
+      : shown;
+  };
   const scroller = () => holder.querySelector('.g-scroll');
   const scrollToToday = () => {
     const sc = scroller();
@@ -2155,7 +2198,7 @@ async function timelineTab({ p, ctx, refresh }) {
     }
     const gantt = h(
       'div',
-      { class: 'gantt', style: { width: `${W}px` } },
+      { class: 'gantt', style: { width: `${W}px`, overflow: 'hidden' } },
       h(
         'div',
         { class: 'g-head' },
@@ -2204,6 +2247,49 @@ async function timelineTab({ p, ctx, refresh }) {
       ].map(([l, v]) => h('button', { 'aria-pressed': String(Math.abs(v - ppd) < 0.05), onclick: () => setPpd(v) }, l)),
     );
   syncZoom();
+  const fromIn = h('input', { type: 'date', class: 'sm', 'aria-label': 'من تاريخ', value: S.from || fmtD(fullMin) });
+  const toIn = h('input', { type: 'date', class: 'sm', 'aria-label': 'إلى تاريخ', value: S.to || fmtD(fullMax) });
+  const custom = h('span', { class: 'g-period-custom', hidden: S.period !== 'custom' }, fromIn, '—', toIn);
+  const setPeriod = () => {
+    applyPeriod();
+    ppd = fit;
+    S.ppd = null;
+    persist();
+    draw();
+    syncZoom();
+  };
+  const periodSel = h(
+    'select',
+    {
+      class: 'sm',
+      'aria-label': 'الفترة المعروضة',
+      onchange: (e) => {
+        S.period = e.target.value;
+        custom.hidden = S.period !== 'custom';
+        if (S.period === 'custom') {
+          S.from = fromIn.value;
+          S.to = toIn.value;
+        }
+        setPeriod();
+      },
+    },
+    [
+      ['all', 'كامل المشروع'],
+      ['3', '٣ أشهر القادمة'],
+      ['6', '٦ أشهر القادمة'],
+      ['12', 'سنة قادمة'],
+      ['custom', 'فترة مخصّصة…'],
+    ].map(([v, l]) => h('option', { value: v, selected: S.period === v }, l)),
+  );
+  const onRange = () => {
+    if (!fromIn.value || !toIn.value || toIn.value <= fromIn.value) return toast('تاريخ النهاية يجب أن يلي البداية', 'err');
+    S.from = fromIn.value;
+    S.to = toIn.value;
+    setPeriod();
+  };
+  fromIn.addEventListener('change', onRange);
+  toIn.addEventListener('change', onRange);
+  const period = h('label', { class: 'g-period' }, h('span', { class: 'xs muted' }, 'الفترة'), periodSel, custom);
   const tog = (key, label, extra) =>
     h(
       'button',
@@ -2246,6 +2332,7 @@ async function timelineTab({ p, ctx, refresh }) {
   const toolbar = h(
     'div',
     { class: 'toolbar' },
+    period,
     zoom,
     h('button', { class: 'btn sm', onclick: scrollToToday }, 'اليوم'),
     tog('base', 'خط الأساس'),
